@@ -4,7 +4,17 @@
 include( "Rake.jl" )
 importall Rake
 
-txt = STDIN|>readstring
+test = true
+if test
+    txt = """ Hello, cat.
+        Cat which go to wall.
+        Привет, кот.
+        Кот, который идет по стене.
+        Котам здесь не место.
+        Стену мыть. """
+else    
+    txt = STDIN|>readstring
+end    
 
 if basename(PROGRAM_FILE)=="rake.jl" 
     # run as script:

@@ -21,6 +21,7 @@ if basename(PROGRAM_FILE)=="rake.jl"
     sentences = split_sentences(txt)
     stoppath = "SmartStoplist.txt"
     
+    ARGS|>length<4 && error("Parameters!")
     minchars=parse(Int, ARGS[1])
     maxwords=parse(Int, ARGS[2])
     minfreq=parse(Int, ARGS[3])
@@ -30,8 +31,8 @@ if basename(PROGRAM_FILE)=="rake.jl"
     if debug
         info(minchars); info(maxwords); info(minfreq); info(head)
         
-        wdlist = readwords(stoppath); info(wdlist)
-        stopwordpattern = stop_word_regex(wdlist); info(stopwordpattern)
+        wdlist = readwords(stoppath); #info(wdlist)
+        stopwordpattern = stop_word_regex(wdlist);# info(stopwordpattern)
         prases = generate_candidate_keywords(sentences, stopwordpattern); info(prases)
         wordscores = calculate_word_scores(prases); info(wordscores)
         kwcandidates = generate_candidate_keyword_scores(prases, wordscores); info(kwcandidates)

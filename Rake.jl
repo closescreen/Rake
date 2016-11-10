@@ -7,9 +7,7 @@ lookas_num(s::AbstractString) = ismatch(r"^\d*[\.\,]?\d*$",s)
 export readwords
 "Return's list of words of file"
 readwords( file::AbstractString) =
-    [ split(l) for l in 
-        file|>eachline if 
-            !ismatch(r"^\s*#",l) ]
+    [w for l in file|>eachline for w in split(l) if !ismatch(r"^\s*#",l) ]
 
 export separate_words
 "Return's words list of text, where word size > min"
